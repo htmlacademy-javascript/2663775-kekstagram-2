@@ -1,4 +1,4 @@
-const MESSAGES_SET = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
@@ -8,7 +8,7 @@ const MESSAGES_SET = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const NAMES_SET = [
+const NAMES = [
   'Маша',
   'Сергей',
   'Вероника',
@@ -35,7 +35,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const craeteIdGenerator = () => {
+const createIdGenerator = () => {
   let lastGenerateId = 0;
 
   return () => {
@@ -44,7 +44,7 @@ const craeteIdGenerator = () => {
   };
 };
 
-const getId = craeteIdGenerator();
+const getId = createIdGenerator();
 
 const getRandomItem = (items) => items[getRandomInteger(0, items.length - 1)];
 
@@ -55,8 +55,8 @@ const createComments = () => {
     const comment = {
       id: getId(),
       avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomItem(MESSAGES_SET),
-      name: getRandomItem(NAMES_SET)
+      message: getRandomItem(MESSAGES),
+      name: getRandomItem(NAMES)
     };
     comments.push(comment);
   }
@@ -77,7 +77,6 @@ const createPhotos = () => {
     photos.push(photo);
   }
   return photos;
-
 };
 
 createPhotos();
