@@ -1,2 +1,2 @@
-import {createPhotos} from './createArrayPhotos';
+import {createPhotos} from './create-photos';
 createPhotos();
