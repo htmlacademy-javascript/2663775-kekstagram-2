@@ -1,2 +1,2 @@
-import {createPhotos} from './create-photos';
-createPhotos();
+import './create-photos';
+import './thumbails';
