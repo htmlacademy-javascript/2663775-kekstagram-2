@@ -1,3 +1,5 @@
+import { openBigPicture } from './big-thumbail';
+
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 
@@ -14,10 +16,14 @@ const renderMiniatures = (photos) => {
     thumbnail.querySelector('.picture__comments').textContent = photo.comments.length;
     thumbnail.querySelector('.picture__likes').textContent = photo.likes;
 
+    thumbnail.addEventListener('click', () => {
+      openBigPicture(photo);
+    });
+
     fragment.appendChild(thumbnail);
   });
 
   container.appendChild(fragment);
 };
 
-export {renderMiniatures};
+export {renderMiniatures, container};
