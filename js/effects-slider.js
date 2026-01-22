@@ -51,6 +51,10 @@ const showSlider = () => {
   sliderContainer.classList.remove('hidden');
 };
 
+const resetEffect = () => {
+  img.style.filter = 'none';
+};
+
 effectContainer.addEventListener('change', (evt) => {
   currentEffect = evt.target.value;
 
@@ -96,3 +100,5 @@ effectContainer.addEventListener('change', (evt) => {
     img.style.filter = styleFilterEffects[currentEffect](startValue);
   }
 });
+
+export { resetEffect };

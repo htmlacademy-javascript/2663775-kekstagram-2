@@ -22,6 +22,14 @@ const enlargeImages = () => {
   }
 };
 
+const resetScaleImages = () => {
+  img.style.transform = `scale(${1})`;
+  scaleControlValue.value = `${100}%`;
+};
+
+
 scaleControlSmaller.addEventListener('click', resizeImage);
 scaleControlBigger.addEventListener('click', enlargeImages);
+
+export { resetScaleImages };
 

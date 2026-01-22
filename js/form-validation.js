@@ -1,8 +1,11 @@
 import { isEscapeKey } from './utils';
+import { showErrorMessages } from './show-error-message';
+import { showGoodMessages } from './show-good-message';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = uploadForm.querySelector('.text__hashtags');
 const commentInput = uploadForm.querySelector('.text__description');
+const button = document.querySelector('.img-upload__submit');
 
 const MAX_HASHTAGS = 5;
 const MAX_COMMENT = 140;
@@ -68,11 +71,6 @@ const getErrorText = (value) => {
 pristine.addValidator(hashtagInput, checksValidityHashtags, getErrorText);
 pristine.addValidator(commentInput, isValidCountComment, 'длина комментария не может составлять больше 140 символов');
 
-uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
-
 const resetvalidate = () => pristine.reset();
 
 hashtagInput.addEventListener('keydown', (evt) => {
@@ -87,4 +85,33 @@ commentInput.addEventListener('keydown', (evt) => {
   }
 });
 
-export { resetvalidate };
+const setUserFormSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
+    button.disabled = true;
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if(isValid) {
+      const formData = new FormData(evt.target);
+
+      fetch(
+        'https://31.javascript.htmlacademy.pro/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ).then((response) => {
+        if (response.ok) {
+          showGoodMessages();
+          onSuccess();
+        } else {
+          showErrorMessages();
+        }
+      }).catch(() => {
+        showErrorMessages();
+      });
+    }
+  });
+};
+
+export { setUserFormSubmit, resetvalidate };
