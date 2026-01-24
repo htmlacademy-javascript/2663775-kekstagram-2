@@ -4,6 +4,7 @@ import { setUserFormSubmit } from './form-validation.js';
 import { showTimeError } from './show-error-message.js';
 import { getData } from './api.js';
 import { initFilters } from './filter.js';
+import { initUploadFile } from './avatar.js';
 
 getData()
   .then((images) => {
@@ -14,4 +15,5 @@ getData()
     showTimeError();
   });
 
+initUploadFile();
 setUserFormSubmit(closePhotoEditor);
