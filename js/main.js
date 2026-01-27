@@ -1,19 +1,20 @@
-import { renderMiniatures } from './thumbails';
-import { closePhotoEditor } from './upload-thumbail-form.js';
-import { setUserFormSubmit } from './form-validation.js';
-import { showTimeError } from './show-error-message.js';
 import { getData } from './api.js';
-import { initFilters } from './filter.js';
-import { initUploadFile } from './avatar.js';
+import { renderPictures } from './pictures.js';
+import { initForm } from './form.js';
+import { showDataErrorMessage } from './messages.js';
+import { initFilters } from './filters.js';
 
-getData()
-  .then((images) => {
-    renderMiniatures(images);
-    initFilters(images);
-  })
-  .catch(() => {
-    showTimeError();
-  });
+const initApp = () => {
+  initForm();
 
-initUploadFile();
-setUserFormSubmit(closePhotoEditor);
+  getData()
+    .then((photos) => {
+      renderPictures(photos);
+      initFilters(photos);
+    })
+    .catch(() => {
+      showDataErrorMessage();
+    });
+};
+
+initApp();
